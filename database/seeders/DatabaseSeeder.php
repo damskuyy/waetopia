@@ -38,5 +38,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('owner'),
             'level' => 'pemilik'
         ]);
+
+        // Panggil seeder lainnya
+        $this->call([
+            KategoriWisataSeeder::class,
+            PaketWisataSeeder::class,
+            ObyekWisataSeeder::class,
+            PenginapanSeeder::class,
+            MetodePembayaranSeeder::class,
+            DiskonSeeder::class,
+            KategoriBeritaSeeder::class,
+            BeritaSeeder::class,
+        ]);
     }
 }

@@ -13,38 +13,22 @@ class KategoriWisataSeeder extends Seeder
      */
     public function run(): void
     {
-        KategoriWisata::create([
-            'kategori_wisata' => 'alam',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'budaya',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'sejarah',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'kuliner',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'religi',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'edukasi',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'olahraga',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'hiburan',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'belanja',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'transportasi',
-        ]);
-        KategoriWisata::create([
-            'kategori_wisata' => 'penginapan',
-        ]);
+        $kategoris = [
+            ['kategori_wisata' => 'Trekking & Hiking'],
+            ['kategori_wisata' => 'Budaya Lokal'],
+            ['kategori_wisata' => 'Fotografer'],
+            ['kategori_wisata' => 'Nature'],
+            ['kategori_wisata' => 'Sunrise/Sunset'],
+            ['kategori_wisata' => 'Kuliner Tradisional'],
+            ['kategori_wisata' => 'Adventure'],
+            ['kategori_wisata' => 'Relaksasi'],
+            ['kategori_wisata' => 'Family Package'],
+            ['kategori_wisata' => 'Educational Tour'],
+            ['kategori_wisata' => 'Kerajinan Lokal'],
+        ];
+
+        foreach ($kategoris as $kategori) {
+            KategoriWisata::create($kategori);
+        }
     }
 }
