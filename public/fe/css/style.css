@@ -1381,6 +1381,374 @@ blockquote {
     margin: auto;
 }
 
+/*------------------------------------------------------------------
+    MOBILE RESPONSIVE DESIGN
+-------------------------------------------------------------------*/
+
+/* Mobile Styles - General */
+@media (max-width: 768px) {
+    /* Header/Navbar */
+    .top-navbar .navbar {
+        padding: 10px 0px;
+    }
+    
+    .top-navbar .navbar-light .navbar-nav .nav-link {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    
+    .navbar-nav .btn-login {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+    
+    /* Slider/Cover */
+    .cover-slides {
+        height: 60vh;
+    }
+    
+    .cover-slides h1 {
+        font-size: 32px;
+    }
+    
+    .cover-slides p {
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    /* About Section */
+    .about-section-box {
+        padding: 40px 0px;
+    }
+    
+    .inner-column h1 {
+        font-size: 24px;
+    }
+    
+    .inner-column p {
+        font-size: 16px;
+    }
+    
+    /* QT Background */
+    .qt-background {
+        padding: 60px 0;
+        background-attachment: scroll;
+    }
+    
+    .qt-background p {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    
+    /* Menu/Gallery */
+    .menu-box, .gallery-box {
+        padding: 40px 0px;
+    }
+    
+    .heading-title h2 {
+        font-size: 24px;
+    }
+    
+    .filter-button-group button {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+    
+    .why-text h4 {
+        font-size: 18px;
+    }
+    
+    .why-text p {
+        font-size: 14px;
+    }
+    
+    /* Customer Reviews */
+    .customer-reviews-box {
+        padding: 40px 0px;
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+        width: 10%;
+        height: 40px;
+    }
+    
+    .carousel-indicators {
+        top: 350px;
+    }
+    
+    /* Contact Info */
+    .contact-imfo-box {
+        padding: 20px 0;
+    }
+    
+    .contact-imfo-box i {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        margin-right: 15px;
+    }
+    
+    .contact-imfo-box h4 {
+        font-size: 16px;
+    }
+    
+    /* Footer */
+    .footer-area {
+        padding-top: 30px;
+    }
+    
+    .footer-area h3 {
+        font-size: 18px;
+    }
+    
+    .subscribe_form .form_input, .subscribe_form .submit {
+        line-height: 40px;
+        font-size: 14px;
+    }
+    
+    .f-social li a {
+        font-size: 20px;
+        margin-right: 8px;
+    }
+    
+    .copyright {
+        padding: 20px 0;
+    }
+    
+    /* All Pages */
+    .page-breadcrumb {
+        padding: 150px 0 100px;
+    }
+    
+    .all-page-title h1 {
+        font-size: 28px;
+    }
+    
+    .inner-pt p {
+        font-size: 16px;
+    }
+    
+    /* Stuff Box */
+    .stuff-box {
+        padding: 40px 0px;
+    }
+    
+    /* Our Team */
+    .our-team {
+        margin: 5px;
+    }
+    
+    .our-team .title {
+        font-size: 18px;
+    }
+    
+    .our-team .post {
+        font-size: 14px;
+    }
+    
+    /* Reservation */
+    .reservation-box {
+        padding: 40px 0px;
+    }
+    
+    .reservation-box h3 {
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+    
+    /* Blog */
+    .blog-box {
+        padding: 40px 0px;
+    }
+    
+    .blog-box-inner .blog-detail {
+        padding: 20px 15px;
+    }
+    
+    .blog-detail h4 {
+        font-size: 16px;
+    }
+    
+    .inner-blog-detail {
+        padding: 20px 15px;
+    }
+    
+    .inner-blog-detail h3 {
+        font-size: 18px;
+    }
+    
+    /* Contact */
+    .contact-box {
+        padding: 40px 0px;
+    }
+    
+    .map-full {
+        height: 300px;
+    }
+    
+    /* Back to Top */
+    #back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 576px) {
+    /* Header */
+    .top-navbar .navbar-light .navbar-nav .nav-link {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+    
+    /* Slider */
+    .cover-slides h1 {
+        font-size: 24px;
+    }
+    
+    .cover-slides p {
+        font-size: 12px;
+    }
+    
+    /* About */
+    .inner-column h1 {
+        font-size: 20px;
+    }
+    
+    /* QT */
+    .qt-background p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    
+    /* Menu */
+    .heading-title h2 {
+        font-size: 20px;
+    }
+    
+    .filter-button-group {
+        margin: 5px 10px;
+    }
+    
+    .filter-button-group button {
+        padding: 6px 15px;
+        font-size: 11px;
+    }
+    
+    /* Reviews */
+    .carousel-control-prev, .carousel-control-next {
+        width: 12%;
+        height: 35px;
+        font-size: 20px;
+    }
+    
+    /* Contact Info */
+    .contact-imfo-box i {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+    
+    .contact-imfo-box h4 {
+        font-size: 14px;
+    }
+    
+    .contact-imfo-box p {
+        font-size: 14px;
+    }
+    
+    /* Footer */
+    .footer-area h3 {
+        font-size: 16px;
+    }
+    
+    .subscribe_form .form_input, .subscribe_form .submit {
+        line-height: 35px;
+        font-size: 12px;
+    }
+    
+    .f-social li a {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+    
+    /* All Pages */
+    .page-breadcrumb {
+        padding: 120px 0 80px;
+    }
+    
+    .all-page-title h1 {
+        font-size: 24px;
+    }
+    
+    /* Reservation */
+    .reservation-box h3 {
+        font-size: 18px;
+    }
+    
+    /* Blog */
+    .blog-detail h4 {
+        font-size: 14px;
+    }
+    
+    .inner-blog-detail h3 {
+        font-size: 16px;
+    }
+    
+    /* Team */
+    .our-team .title {
+        font-size: 16px;
+    }
+    
+    .our-team .post {
+        font-size: 12px;
+    }
+    
+    /* Map */
+    .map-full {
+        height: 250px;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 992px) {
+    .cover-slides h1 {
+        font-size: 48px;
+    }
+    
+    .cover-slides p {
+        font-size: 16px;
+    }
+    
+    .inner-column h1 {
+        font-size: 26px;
+    }
+    
+    .heading-title h2 {
+        font-size: 26px;
+    }
+    
+    .qt-background p {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    
+    .all-page-title h1 {
+        font-size: 32px;
+    }
+}
+
 
 
 

@@ -30,7 +30,7 @@ class MetodePembayaranController extends Controller
         $request->validate([
             'metode_pembayaran' => 'required|max:255',
             'nomor_rekening' => 'required|max:30',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
         $data = $request->only(['metode_pembayaran', 'nomor_rekening']);
@@ -56,7 +56,7 @@ class MetodePembayaranController extends Controller
         $request->validate([
             'metode_pembayaran' => 'required|max:255',
             'nomor_rekening' => 'required|max:30',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
         $metode = MetodePembayaran::findOrFail($id);
