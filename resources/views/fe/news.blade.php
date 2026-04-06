@@ -14,7 +14,7 @@
             <div class="col-lg-12">
                 <div class="heading-title text-center">
                     <h2>Hot News</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+                    <p>Berita dan update terbaru tentang destinasi wisata serta kegiatan lokal di desa kami.</p>
                 </div>
             </div>
         </div>

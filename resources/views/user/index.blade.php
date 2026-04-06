@@ -13,6 +13,19 @@
             <h2>Daftar User</h2>
             <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah User</a>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card-body">
             <table class="table table-bordered w-100">
                 <thead>
@@ -33,7 +46,7 @@
                             @if($u->foto)
                                 <img src="{{ asset('storage/'.$u->foto) }}" alt="Foto" class="img-fluid" width="50">
                             @else
-                                <img src="{{ asset('images/default.png') }}" alt="Foto" class="img-fluid" width="50">
+                                <img src="{{ asset('be/images/default.png') }}" alt="Foto" class="img-fluid" width="50">
                             @endif
                         </td>
                         <td>{{ $u->name }}</td>

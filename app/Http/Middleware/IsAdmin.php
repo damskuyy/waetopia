@@ -16,7 +16,7 @@ class IsAdmin
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->guest() || auth()->user()->level !== 'admin') {
+        if (auth()->guest() || !in_array(auth()->user()->level, ['admin', 'pemilik'])) {
             abort(403);
         }
         return $next($request);

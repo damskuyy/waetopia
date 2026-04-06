@@ -15,7 +15,7 @@
 	<!-- Start Contact -->
 	<div class="heading-title text-center" style="margin-top: 100px;">
 		<h2>Location</h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+		<p>Temukan lokasi desa wisata kami dan rencanakan kunjungan Anda bersama keluarga.</p>
 		<div class="map-full" style="margin-top: 50px;">
 			<iframe 
 			src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3504.8677363437373!2d106.86096107441362!3d-6.487623663428328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMjknMTUuNSJTIDEwNsKwNTEnNDguNyJF!5e1!3m2!1sid!2sid!4v1745394732689!5m2!1sid!2sid" 
@@ -33,7 +33,7 @@
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
 						<h2>Contact Me</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+						<p>Hubungi kami untuk informasi paket wisata, penginapan, dan event lokal.</p>
 					</div>
 				</div>
 			</div>

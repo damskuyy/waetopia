@@ -74,7 +74,7 @@
       </div>
     </div>
     <!-- Card Offcanvas -->
-    <div class="card card-offcanvas" id="contact-off" >
+    {{-- <div class="card card-offcanvas" id="contact-off" >
       <div class="card-header">
         <h2>Contacts</h2>
         <a href="#" class="btn btn-primary btn-pill px-4">Add New</a>
@@ -166,7 +166,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <script src="{{ asset('be/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('be/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

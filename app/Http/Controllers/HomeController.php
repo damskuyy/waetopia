@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaketWisata;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,8 +12,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $paketWisatas = PaketWisata::latest('id')->take(6)->get();
+
         return view('home.index', [
             'title' => 'Home',
+            'paketWisatas' => $paketWisatas,
         ]);
     }
 

@@ -82,7 +82,7 @@ class BookingController extends Controller
             'id_diskon' => $validated['id_diskon'] ?? null,
             'id_metode_pembayaran' => $validated['id_metode_pembayaran'] ?? null,
             'nama_pelanggan' => $pelanggan->nama_lengkap,
-            'email' => Auth::user()->email ?? null,
+            'email' => Auth::guard('pelanggan')->user()->email ?? null,
             'tgl_reservasi_wisata' => $validated['tgl_reservasi_wisata'],
             'tgl_selesai_reservasi' => $validated['tgl_selesai_reservasi'] ?? null,
             'harga' => $harga,
@@ -111,5 +111,25 @@ class BookingController extends Controller
         $reservasi = Reservasi::with(['pelanggan', 'paketWisata', 'diskon', 'metodePembayaran'])->findOrFail($id);
         $pdf = Pdf::loadView('booking.pdf', compact('reservasi'));
         return $pdf->download('Data_Reservasi_Desa_Wisata_Waerebo.pdf');
+    }
+
+    public function history()
+    {
+        // Ambil user pelanggan yang sedang login menggunakan guard 'pelanggan'
+        $user = Auth::guard('pelanggan')->user();
+        
+        if (!$user) {
+            return redirect()->route('auth_fe.login')->with('error', 'Anda harus login terlebih dahulu');
+        }
+        
+        // Ambil semua reservasi berdasarkan email user pelanggan
+        $reservasis = Reservasi::where('email', $user->email)
+            ->with(['pelanggan', 'paketWisata', 'diskon', 'metodePembayaran'])
+            ->orderBy('tgl_reservasi_wisata', 'desc')
+            ->paginate(10);
+
+        return view('fe.booking-history', compact('reservasis'), [
+            'title' => 'Riwayat Booking'
+        ]);
     }
 }

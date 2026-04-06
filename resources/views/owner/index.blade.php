@@ -140,10 +140,10 @@
     <div class="mt-4">
         {{-- <a href="{{ route('owner.laporan.export') }}" class="btn btn-success">
             <i class="fas fa-file-excel"></i> Export ke Excel
-        </a> --}}
+        </a>
         <a href="{{ route('owner.laporan.exportPdf') }}" class="btn btn-danger">
             <i class="fas fa-file-pdf"></i> Export ke PDF
-        </a>
+        </a> --}}
     </div>
 </div>
 @endsection

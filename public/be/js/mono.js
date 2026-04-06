@@ -227,8 +227,27 @@ $(document).ready(function () {
   var dropdownToggle = $(".notify-toggler");
   var dropdownNotify = $(".dropdown-notify");
 
+  // Update notification counts
+  function updateNotificationCounts() {
+    var allItems = $("#all .media-sm").length;
+    var msgItems = $("#message .media-sm").length;
+    var otherItems = $("#other .media-sm").length;
+    var totalCount = allItems;
+
+    $("#all-count").text(allItems);
+    $("#message-count").text(msgItems);
+    $("#other-count").text(otherItems);
+    $("#notify-badge").text(totalCount);
+  }
+
+  // Initialize counts on page load
+  updateNotificationCounts();
+
   if (dropdownToggle.length !== 0) {
-    dropdownToggle.on("click", function () {
+    dropdownToggle.on("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      updateNotificationCounts();
       if (!dropdownNotify.is(":visible")) {
         dropdownNotify.fadeIn(5);
       } else {
@@ -239,7 +258,9 @@ $(document).ready(function () {
     $(document).mouseup(function (e) {
       if (
         !dropdownNotify.is(e.target) &&
-        dropdownNotify.has(e.target).length === 0
+        dropdownNotify.has(e.target).length === 0 &&
+        !dropdownToggle.is(e.target) &&
+        dropdownToggle.has(e.target).length === 0
       ) {
         dropdownNotify.fadeOut(5);
       }
@@ -279,18 +300,27 @@ $(document).ready(function () {
 
   /*======== 12. NAVBAR SEARCH ========*/
   var searchInput = $("#search-input");
-  if (searchInput !== 0) {
+  if (searchInput.length !== 0) {
     var inputSearch = $("#input-group-search");
-    searchInput.focus(function () {
-      $(".dropdown-menu-search").show();
+    var searchMenu = $(".dropdown-menu-search");
+
+    searchInput.on("focus", function () {
+      searchMenu.show();
       removeRadius();
       $(this).addClass("focus");
     });
 
-    searchInput.focusout(function () {
-      $(".dropdown-menu-search").hide();
-      addRadius();
-      $(this).removeClass("focus");
+    $(document).mouseup(function (e) {
+      if (
+        !searchMenu.is(e.target) &&
+        searchMenu.has(e.target).length === 0 &&
+        !inputSearch.is(e.target) &&
+        inputSearch.has(e.target).length === 0
+      ) {
+        searchMenu.hide();
+        addRadius();
+        searchInput.removeClass("focus");
+      }
     });
 
     function removeRadius() {
@@ -308,22 +338,74 @@ $(document).ready(function () {
     }
 
     window.displayBoxIndex = -1;
-    searchInput.keyup(function (e) {
-      if (e.keyCode == 40) {
-        Navigate(1);
-      }
-      if (e.keyCode == 38) {
-        Navigate(-1);
-      }
-      if (e.keyCode == 27) {
-        $(".dropdown-menu-search").hide();
-        addRadius();
+    searchInput.on("keydown", function (e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        var firstVisible = searchMenu
+          .find(".nav-item:visible")
+          .not(".search-no-results")
+          .first();
+        if (firstVisible.length) {
+          var link = firstVisible.find("a").attr("href");
+          if (link && link !== "#") {
+            window.location.href = link;
+          }
+        }
       }
     });
 
+    searchMenu.on("click", ".nav-link", function () {
+      searchMenu.hide();
+      addRadius();
+      searchInput.removeClass("focus");
+    });
+
+    searchInput.on("keyup", function (e) {
+      if (e.keyCode == 40) {
+        Navigate(1);
+      } else if (e.keyCode == 38) {
+        Navigate(-1);
+      } else if (e.keyCode == 27) {
+        searchMenu.hide();
+        addRadius();
+      } else {
+        filterSearchItems($(this).val());
+      }
+    });
+
+    function filterSearchItems(query) {
+      searchMenu.show();
+      var lowerQuery = query.trim().toLowerCase();
+      var items = searchMenu.find(".nav-item").not(".search-no-results");
+      var anyVisible = false;
+
+      if (lowerQuery.length === 0) {
+        items.show();
+        searchMenu.find(".search-no-results").remove();
+        return;
+      }
+
+      items.each(function () {
+        var text = $(this).text().trim().toLowerCase();
+        var match = text.indexOf(lowerQuery) !== -1;
+        $(this).toggle(match);
+        if (match) {
+          anyVisible = true;
+        }
+      });
+
+      searchMenu.find(".search-no-results").remove();
+      if (!anyVisible) {
+        searchMenu.append(
+          '<li class="nav-item search-no-results"><span class="nav-link disabled">No results found</span></li>'
+        );
+      }
+    }
+
     var Navigate = function (diff) {
       displayBoxIndex += diff;
-      var oBoxCollection = $(".dropdown-menu-search .nav-item");
+      var oBoxCollection = searchMenu.find(".nav-item").not(".search-no-results");
+      if (oBoxCollection.length === 0) return;
       if (displayBoxIndex >= oBoxCollection.length) displayBoxIndex = 0;
       if (displayBoxIndex < 0) displayBoxIndex = oBoxCollection.length - 1;
       var cssClass = "active";

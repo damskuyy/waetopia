@@ -11,6 +11,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // dd(auth()->user());
         return view('admin.index', [
             'title' => 'Admin' // Pastikan 'title' diatur di sini
         ]);

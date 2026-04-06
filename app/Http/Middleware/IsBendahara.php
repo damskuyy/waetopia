@@ -15,7 +15,7 @@ class IsBendahara
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->guest() || auth()->user()->level !== 'bendahara') {
+        if (auth()->guest() || !in_array(auth()->user()->level, ['bendahara', 'pemilik'])) {
             abort(403);
         }
         return $next($request);

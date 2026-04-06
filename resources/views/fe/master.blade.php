@@ -115,6 +115,9 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="{{ route('booking.history') }}">
+                                        <i class="mdi mdi-history"></i> Riwayat Booking
+                                    </a>
                                     <a class="dropdown-item" href="#">Settings</a>
                                     <div class="dropdown-divider"></div>
                                     <form action="{{ route('auth_fe.logout') }}" method="POST">

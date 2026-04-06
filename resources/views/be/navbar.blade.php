@@ -11,7 +11,7 @@
 
       <!-- search form -->
       <div class="search-form">
-        <form action="index.html" method="get">
+        <form action="javascript:void(0);" method="get" onsubmit="return false;">
           <div class="input-group input-group-sm" id="input-group-search">
             <input type="text" autocomplete="off" name="query" id="search-input" class="form-control" placeholder="Search..." />
             <div class="input-group-append">
@@ -22,16 +22,25 @@
         <ul class="dropdown-menu dropdown-menu-search">
 
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Morbi leo risus</a>
+            <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Dapibus ac facilisis in</a>
+            <a class="nav-link" href="{{ url('/kategori_berita') }}">Kategori Berita</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Porta ac consectetur ac</a>
+            <a class="nav-link" href="{{ url('/berita') }}">Berita</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Vestibulum at eros</a>
+            <a class="nav-link" href="{{ url('/user') }}">Data User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/data_pelanggan') }}">Data Pelanggan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/data_karyawan') }}">Data Karyawan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/settings') }}">Pengaturan</a>
           </li>
 
         </ul>
@@ -40,26 +49,26 @@
 
       <ul class="nav navbar-nav">
         <!-- Offcanvas -->
-        <li class="custom-dropdown">
+        {{-- <li class="custom-dropdown">
           <a class="offcanvas-toggler active custom-dropdown-toggler" data-offcanvas="contact-off" href="javascript:" >
             <i class="mdi mdi-contacts icon"></i>
           </a>
-        </li>
+        </li> --}}
         <li class="custom-dropdown">
           <button class="notify-toggler custom-dropdown-toggler">
             <i class="mdi mdi-bell-outline icon"></i>
-            <span class="badge badge-xs rounded-circle">21</span>
+            <span class="badge badge-xs rounded-circle" id="notify-badge">5</span>
           </button>
           <div class="dropdown-notify">
 
             <header>
               <div class="nav nav-underline" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="all-tabs" data-toggle="tab" href="#all" role="tab" aria-controls="nav-home"
-                  aria-selected="true">All (5)</a>
+                  aria-selected="true">All (<span id="all-count">5</span>)</a>
                 <a class="nav-item nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="nav-profile"
-                  aria-selected="false">Msgs (4)</a>
+                  aria-selected="false">Msgs (<span id="message-count">4</span>)</a>
                 <a class="nav-item nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="nav-contact"
-                  aria-selected="false">Others (3)</a>
+                  aria-selected="false">Others (<span id="other-count">3</span>)</a>
               </div>
             </header>
 
@@ -159,7 +168,7 @@
 
                 </div>
 
-                <div class="tab-pane fade" id="message" role="tabpanel" aria-labelledby="message-tab">
+                {{-- <div class="tab-pane fade" id="message" role="tabpanel" aria-labelledby="message-tab">
 
                   <div class="media media-sm p-4 mb-0">
                     <div class="media-sm-wrapper">
@@ -230,7 +239,7 @@
                     </div>
                   </div>
 
-                </div>
+                </div> --}}
                 <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="contact-tab">
 
                   <div class="media media-sm p-4 bg-light mb-0">
@@ -304,8 +313,8 @@
         <li class="dropdown user-menu">
           <button class="dropdown-toggle nav-link" data-toggle="dropdown">
             <img src="{{ Auth::user()?->foto ? asset('storage/' . Auth::user()->foto) : asset('be/images/default.png') }}" class="user-image rounded-circle" alt="User Image" />
-            <span class="d-none d-lg-inline-block">{{ Auth::user()->name ?? 'Guest' }}</span>
             <span class="d-none d-lg-inline-block">{{ Auth::user()->level ?? 'User' }}</span>
+            <span class="d-none d-lg-inline-block">{{ Auth::user()->name ?? 'Guest' }}</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right">
             <li>

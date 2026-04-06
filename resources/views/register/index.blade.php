@@ -27,7 +27,7 @@
   <link id="main-css-href" rel="stylesheet" href="be/css/style.css" />
 
   <!-- FAVICON -->
-  <link href="be/images/favicon.png" rel="shortcut icon" />
+  <link href="be/images/logo-travel.png" rel="shortcut icon" />
 
   <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -90,13 +90,27 @@
                     @enderror
                   </div>
                   <div class="form-group col-md-12">
-                    <input type="password" class="form-control input-lg" id="password" name="password" placeholder="Password" required>
+                    <div class="input-group input-group-lg">
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#password">
+                          <i class="mdi mdi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
                     @error('password')
                       <small class="text-danger">{{ $message }}</small>
                     @enderror
                   </div>
                   <div class="form-group col-md-12">
-                    <input type="password" class="form-control input-lg" id="cpassword" name="password_confirmation" placeholder="Confirm Password" required>
+                    <div class="input-group input-group-lg">
+                      <input type="password" class="form-control" id="cpassword" name="password_confirmation" placeholder="Confirm Password" required>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#cpassword">
+                          <i class="mdi mdi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-12">
                     <div class="d-flex justify-content-between mb-3">
@@ -119,4 +133,24 @@
     </div>
   </div>
 </body>
+
+<script src="be/plugins/jquery/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $(".toggle-password").on("click", function(e) {
+      e.preventDefault();
+      var target = $(this).data("target");
+      var input = $(target);
+      var icon = $(this).find("i");
+
+      if (input.attr("type") === "password") {
+        input.attr("type", "text");
+        icon.removeClass("mdi-eye").addClass("mdi-eye-off");
+      } else {
+        input.attr("type", "password");
+        icon.removeClass("mdi-eye-off").addClass("mdi-eye");
+      }
+    });
+  });
+</script>
 </html>

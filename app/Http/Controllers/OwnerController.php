@@ -115,11 +115,8 @@ class OwnerController extends Controller
             'reservasis' => $reservasis,
             'totalOmset' => $totalOmset,
             'totalSelesai' => $totalSelesai,
-            // 'totalCancel' => $totalCancel,
             'totalDibayar' => $totalDibayar,
             'totalDipesan' => $totalDipesan,
-            // 'startDate' => $startDate,
-            // 'endDate' => $endDate,
         ]);
     }
 

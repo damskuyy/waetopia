@@ -31,7 +31,7 @@
 
 
   <!-- FAVICON -->
-  <link href="be/images/favicon.png" rel="shortcut icon" />
+  <link href="be/images/logo-travel.png" rel="shortcut icon" />
 
   <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -68,8 +68,15 @@
                           <input type="email" name="email" class="form-control input-lg" id="email" aria-describedby="emailHelp"
                             placeholder="email">
                         </div>
-                        <div class="form-group col-md-12 ">
-                          <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password">
+                        <div class="form-group col-md-12">
+                          <div class="input-group input-group-lg">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                            <div class="input-group-append">
+                              <button class="btn btn-outline-secondary toggle-password" type="button" data-target="#password">
+                                <i class="mdi mdi-eye"></i>
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div class="col-md-12">
                           <div class="d-flex justify-content-between mb-3">
@@ -97,7 +104,25 @@
             </div>
           </div>
         </div>
+  <script src="be/plugins/jquery/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".toggle-password").on("click", function(e) {
+        e.preventDefault();
+        var target = $(this).data("target");
+        var input = $(target);
+        var icon = $(this).find("i");
 
+        if (input.attr("type") === "password") {
+          input.attr("type", "text");
+          icon.removeClass("mdi-eye").addClass("mdi-eye-off");
+        } else {
+          input.attr("type", "password");
+          icon.removeClass("mdi-eye-off").addClass("mdi-eye");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 

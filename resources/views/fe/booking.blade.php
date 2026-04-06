@@ -27,21 +27,21 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label>Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama_pelanggan" value="{{ Auth::user()->nama_lengkap ?? '' }}" required>
+                    <input type="text" class="form-control" name="nama_pelanggan" value="{{ Auth::guard('pelanggan')->user()->nama_lengkap ?? '' }}" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ Auth::user()->email ?? '' }}" required>
+                    <input type="email" name="email" class="form-control" value="{{ Auth::guard('pelanggan')->user()->email ?? '' }}" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label>Nomor HP</label>
-                    <input type="text" class="form-control" name="no_hp" value="{{ Auth::user()->no_hp ?? '' }}" required>
+                    <input type="text" class="form-control" name="no_hp" value="{{ Auth::guard('pelanggan')->user()->no_hp ?? '' }}" required>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Alamat</label>
-                    <textarea class="form-control" name="alamat" rows="2" required>{{ Auth::user()->alamat ?? '' }}</textarea>
+                    <textarea class="form-control" name="alamat" rows="2" required>{{ Auth::guard('pelanggan')->user()->alamat ?? '' }}</textarea>
                 </div>
             </div>
             <hr class="my-4">
@@ -73,11 +73,11 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label>Harga</label>
-                    <input type="number" name="harga" id="harga" class="form-control" readonly placeholder="Otomatis dari paket">
+                    <input type="text" id="harga" class="form-control" readonly placeholder="Otomatis dari paket">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Subtotal</label>
-                    <input type="number" name="subtotal" id="subtotal" class="form-control" readonly placeholder="Otomatis">
+                    <input type="text" id="subtotal" class="form-control" readonly placeholder="Otomatis">
                 </div>
             </div>
             <div class="row">
@@ -92,13 +92,14 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Nilai Diskon</label>
-                    <input type="number" name="nilai_diskon" id="nilai_diskon" class="form-control" readonly placeholder="Otomatis">
+                    <input type="text" id="nilai_diskon" class="form-control" readonly placeholder="Otomatis">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label>Total Bayar</label>
-                    <input type="number" name="total_bayar" id="total_bayar" class="form-control" readonly placeholder="Otomatis">
+                    <input type="text" id="total_bayar" class="form-control" readonly placeholder="Otomatis">
+                    <input type="hidden" name="total_bayar" id="total_bayar_value">
                 </div>
                 <div class="col-md-6 mb-3">
                     <label>Metode Pembayaran</label>
@@ -119,19 +120,14 @@
                     <label>Bukti Transfer</label>
                     <input type="file" name="foto{{ $i }}" class="form-control-file">
                 </div> --}}
-                <div class="col-md-6 mb-3">
-                    <label>Status</label>
-                    <select name="status_reservasi_wisata" class="form-control" required>
-                        <option value="Dipesan">Dipesan</option>
-                        <option value="Dibayar">Dibayar</option>
-                        <option value="Selesai">Selesai</option>
-                        <option value="Dibatalkan">Dibatalkan</option>
-                    </select>
-                </div>
             </div>
+            <input type="hidden" name="status_reservasi_wisata" value="Dipesan">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-primary mt-3">Simpan Reservasi</button>
+                    <a href="{{ route('booking.history') }}" class="btn btn-info mt-3 ml-2">
+                        <i class="mdi mdi-history"></i> Lihat Riwayat Booking
+                    </a>
                 </div>
             </div>
         </form>
@@ -145,6 +141,11 @@
 <!-- End Reservation -->
 
 <script>
+function formatRupiah(num) {
+    const numStr = Math.round(num).toString();
+    return 'Rp ' + numStr.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const paketSelect = document.getElementById('id_paket');
     const hargaInput = document.getElementById('harga');
@@ -153,27 +154,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const diskonSelect = document.getElementById('id_diskon');
     const nilaiDiskonInput = document.getElementById('nilai_diskon');
     const totalBayarInput = document.getElementById('total_bayar');
+    const totalBayarValue = document.getElementById('total_bayar_value');
 
     function hitung() {
         const harga = Number(paketSelect.options[paketSelect.selectedIndex]?.dataset.harga || 0);
         const peserta = Number(jumlahPeserta.value || 0);
         const subtotal = harga * peserta;
-        subtotalInput.value = subtotal;
-        hargaInput.value = harga;
+        
+        subtotalInput.value = formatRupiah(subtotal);
+        hargaInput.value = formatRupiah(harga);
 
         let persentaseDiskon = 0;
         if (diskonSelect.value) {
             persentaseDiskon = Number(diskonSelect.options[diskonSelect.selectedIndex].dataset.persentase || 0);
         }
         const nilaiDiskon = subtotal * (persentaseDiskon / 100);
-        nilaiDiskonInput.value = nilaiDiskon;
+        nilaiDiskonInput.value = formatRupiah(nilaiDiskon);
 
         const totalBayar = subtotal - nilaiDiskon;
-        totalBayarInput.value = totalBayar;
+        totalBayarInput.value = formatRupiah(totalBayar);
+        totalBayarValue.value = totalBayar; // Store numeric value for form submission
     }
 
     paketSelect.addEventListener('change', hitung);
     jumlahPeserta.addEventListener('input', hitung);
     diskonSelect.addEventListener('change', hitung);
+    
+    // Initial calculation
+    hitung();
 });
 </script>
